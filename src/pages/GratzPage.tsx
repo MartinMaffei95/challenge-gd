@@ -1,6 +1,4 @@
 import { useNavigate } from 'react-router';
-import { Confeti } from '../components/ConfetiComponent/Confeti';
-import QuizFormContainer from '../components/Container/QuizFormContainer';
 
 type GratzPageProps = {
   handleModal: Function;
@@ -15,7 +13,6 @@ export function GratzPage({ handleModal }: GratzPageProps) {
 
   return (
     <>
-      {/* <Confeti /> */}
       <h3 className="colored text-4xl mt-6 mb-6 text-center">
         Felicitaciones!
       </h3>

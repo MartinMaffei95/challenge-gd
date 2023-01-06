@@ -1,3 +1,4 @@
+import { FormikErrors } from 'formik';
 import {
   ChangeEvent,
   ChangeEventHandler,
@@ -15,6 +16,7 @@ interface SelectField {
   handleChange: ChangeEventHandler<HTMLSelectElement>;
   handleBlur: FocusEventHandler<HTMLSelectElement>;
   errorMessage?: string | null;
+
   inputClassname?: string;
   labelClassname?: string;
 }

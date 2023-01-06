@@ -19,7 +19,9 @@ export const useResultStates = () => {
 
   useEffect(() => {
     try {
-      getQuizes().then((res) => assingQuizes(res, location?.state?.id));
+      getQuizes().then((res) =>
+        assingQuizes(res as QuizResponse[], location?.state?.id)
+      );
     } catch (e) {
       console.error('AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHGGGG MEMUERO');
     }

@@ -1,3 +1,4 @@
+import { FormikErrors } from 'formik';
 import { ChangeEventHandler, FocusEventHandler } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
 
@@ -10,6 +11,7 @@ interface CheckBoxField {
   handleChange: ChangeEventHandler<HTMLInputElement>;
   handleBlur: FocusEventHandler<HTMLInputElement>;
   errorMessage?: string | null;
+
   inputClassname?: string;
   labelClassname?: string;
   icon?: JSX.Element;

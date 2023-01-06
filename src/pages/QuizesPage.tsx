@@ -1,8 +1,4 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import QuizFormContainer from '../components/Container/QuizFormContainer';
-import { QuizResponse } from '../interfaces/QuizResponse.interface';
-import { getQuizes } from '../services/Quizes.services';
+import { useNavigate } from 'react-router';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { ResultCard } from '../components/Pure/ResultCard';
 import { useResultStates } from '../Hooks/useResultStates';

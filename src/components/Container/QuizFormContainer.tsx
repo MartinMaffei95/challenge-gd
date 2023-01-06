@@ -1,16 +1,23 @@
+// ## REACT, TYPES, & INTERFACES
 import { FormEvent, useState } from 'react';
+import { FieldItem } from '../../interfaces/FieldItem.interface';
+
+// ## GETTING ITEMS FOR FORM
 import { items } from '../../config/fields.json';
-import { useNavigate } from 'react-router-dom';
 
 // ## COMPONENTS
 import InputField from '../FormFields/InputField';
-import { FieldItem } from '../../interfaces/FieldItem.interface';
 import SelectField from '../FormFields/SelectField';
 import CheckBoxField from '../FormFields/CheckBoxField';
-import { useFormikRequired } from '../../Hooks/useFormikRequired';
-
+// ## TOASTIFY
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// ## FORMIK
 import { useFormik, FormikProps } from 'formik';
+import { useFormikRequired } from '../../Hooks/useFormikRequired';
+// ## SERVICES
 import { postQuizes } from '../../services/Quizes.services';
+import { runToast } from '../../utils/runToast';
 
 type QuizFormContainerProps = {
   handleModal: Function;
@@ -18,8 +25,6 @@ type QuizFormContainerProps = {
 const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
   //Getting fields for form
   const [formFields, setFormFields] = useState<FieldItem[]>(items);
-
-  const navigate = useNavigate();
 
   const { initialValues, validations } = useFormikRequired(items);
 
@@ -36,9 +41,9 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
       handleModal(true);
     } catch (err) {
       if (err instanceof Error) {
-        console.log(err);
+        runToast('ERROR', 'Ocurrio un error. No pudimos enviar la encuesta');
       } else {
-        console.log(err);
+        runToast('ERROR', 'Ocurrio un error. No pudimos enviar la encuesta');
       }
     }
   };
@@ -58,10 +63,21 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
     validationSchema: validations,
   });
 
-  console.log(initialValues);
-  console.log(values);
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+
       <form onSubmit={handleSubmit}>
         {formFields
           ? formFields.map((field, i) => {
@@ -70,7 +86,7 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
                   return (
                     <CheckBoxField
                       key={field?.name || i}
-                      value={values[field.name]}
+                      value={values[field.name ? field.name : 0]}
                       label={field?.label ? field?.label : ''}
                       inputName={field?.name ? field?.name : ''}
                       labelClassname="label-style"
@@ -79,8 +95,8 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                       errorMessage={
-                        touched[field.name] && errors[field.name]
-                          ? errors[field.name]
+                        touched[field.name || 0] && errors[field.name || 0]
+                          ? (errors[field.name || 0] as string)
                           : null
                       }
                     />
@@ -89,7 +105,7 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
                   return (
                     <SelectField
                       key={field?.name || i}
-                      value={values[field.name]}
+                      value={values[field.name || 0]}
                       label={field?.label ? field?.label : ''}
                       inputName={field?.name ? field?.name : ''}
                       optGroup={field?.options ? field?.options : []}
@@ -98,8 +114,8 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                       errorMessage={
-                        touched[field.name] && errors[field.name]
-                          ? errors[field.name]
+                        touched[field.name || 0] && errors[field.name || 0]
+                          ? (errors[field.name || 0] as string)
                           : null
                       }
                     />
@@ -118,7 +134,7 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
                   return (
                     <InputField
                       key={field?.name || i}
-                      value={values[field.name]}
+                      value={values[field.name || 0]}
                       label={field?.label ? field?.label : ''}
                       inputName={field?.name ? field?.name : ''}
                       labelClassname="label-style"
@@ -127,8 +143,8 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                       errorMessage={
-                        touched[field.name] && errors[field.name]
-                          ? errors[field.name]
+                        touched[field.name || 0] && errors[field.name || 0]
+                          ? (errors[field.name || 0] as string)
                           : null
                       }
                     />
