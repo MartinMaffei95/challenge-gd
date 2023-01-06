@@ -8,7 +8,7 @@ function QuizesPage() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className="pb-8 p-4">
       <button
         className="btn-disagree text-m p-2 text-primary-800 border-primary-800 flex justify-center items-center"
         onClick={() => navigate('/')}
@@ -16,10 +16,10 @@ function QuizesPage() {
         <MdArrowBackIosNew className="text-primary-800" />
         Volver
       </button>
-      <h3 className="title">Estos son los resultados</h3>
+      <h3 className="title">Resultados de todas las encuestas</h3>
       <div>
         {clientResult ? (
-          <div className="flex flex-col gap-2 mt-2">
+          <div className="flex flex-col gap-2 mt-2 ">
             <p className="subtitle">Mi respuesta</p>
 
             <ResultCard key={clientResult.id} quiz={clientResult} />
@@ -40,7 +40,7 @@ function QuizesPage() {
             : null}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

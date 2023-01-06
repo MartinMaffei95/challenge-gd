@@ -48,6 +48,7 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
     }
   };
   const {
+    setFieldValue,
     setErrors,
     setTouched,
     setValues,
@@ -62,9 +63,9 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
     initialValues: initialValues,
     validationSchema: validations,
   });
-
+  console.log(values);
   return (
-    <div>
+    <div className=" md:w-[80vw] m-auto bg-white p-4 rounded shadow-xl mt-8">
       <ToastContainer
         position="top-right"
         autoClose={5000}
@@ -92,7 +93,7 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
                       labelClassname="label-style"
                       inputClassname={'w-6 accent-primary-400'}
                       type={field?.type}
-                      handleChange={handleChange}
+                      handleChange={setFieldValue}
                       handleBlur={handleBlur}
                       errorMessage={
                         touched[field.name || 0] && errors[field.name || 0]
