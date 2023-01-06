@@ -4,6 +4,12 @@ App en Reactjs. Genera una interfaz de app para encuestas basandose en un archiv
 Las respuestas de la encuesta son enviadas a una base de datos de Firebase.
 Una vez realizada nos muestra un modal informando que se envio nuestra encuesta. Este nos da la posibilidad de ver todas las respuestas almacenadas (entre las que destacan la nuestra) o realizar una nueva encuesta.
 
+# Descripcion
+
+El proyecto fue creado con Vite usando Reacjs + Typescript.
+Deploy en [Vercel](https://challenge-greydive-seven.vercel.app/)
+Repositorio en [GitHub](https://github.com/MartinMaffei95/challenge-greydive)
+
 # Vistas
 
 ### Home
