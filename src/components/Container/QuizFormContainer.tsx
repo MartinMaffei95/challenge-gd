@@ -1,6 +1,5 @@
 import { FormEvent, useState } from 'react';
 import { items } from '../../config/fields.json';
-
 import { useNavigate } from 'react-router-dom';
 
 // ## COMPONENTS
@@ -26,7 +25,9 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     try {
-      await postQuizes(values);
+      const response = await postQuizes(values);
+      //setting localstorage with id
+      localStorage.setItem('client_id', JSON.stringify(response));
       //reset form values
       setValues(initialValues);
       setErrors(initialValues);
@@ -57,10 +58,11 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
     validationSchema: validations,
   });
 
+  console.log(initialValues);
+  console.log(values);
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <button onClick={() => handleModal(true)}>ABRIR</button>
         {formFields
           ? formFields.map((field, i) => {
               switch (field.type) {
@@ -68,7 +70,7 @@ const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
                   return (
                     <CheckBoxField
                       key={field?.name || i}
-                      checked={values[field.name]}
+                      value={values[field.name]}
                       label={field?.label ? field?.label : ''}
                       inputName={field?.name ? field?.name : ''}
                       labelClassname="label-style"

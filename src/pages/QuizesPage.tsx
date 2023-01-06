@@ -3,72 +3,46 @@ import { useLocation, useNavigate } from 'react-router';
 import QuizFormContainer from '../components/Container/QuizFormContainer';
 import { QuizResponse } from '../interfaces/QuizResponse.interface';
 import { getQuizes } from '../services/Quizes.services';
-
+import { MdArrowBackIosNew } from 'react-icons/md';
+import { ResultCard } from '../components/Pure/ResultCard';
+import { useResultStates } from '../Hooks/useResultStates';
 function QuizesPage() {
-  const [results, setResults] = useState<QuizResponse[]>([]);
-  const [clientResult, setClientResult] = useState<QuizResponse>();
+  const { results, clientResult } = useResultStates();
+
   const navigate = useNavigate();
 
-  let location = useLocation();
-  console.log(location.state.id);
-
-  type QuizResponseType = { quiz: QuizResponse };
-  const ResultCard = ({ quiz }: QuizResponseType) => {
-    type TextLineProps = {
-      name: string;
-      value: string;
-    };
-    const TextLine = ({ name, value }: TextLineProps) => {
-      return (
-        <div className="label-style text-lg pt-1 pb-1 flex justify-between border-b-2">
-          <span className="font-semibold">{name}:</span>
-          <span>{value}</span>
-        </div>
-      );
-    };
-    return (
-      <div
-        className="border-primary-500 border-2 text-lg w-1/2 rounded-sm "
-        key={quiz.id}
-      >
-        <TextLine name={'Nombre'} value={quiz.full_name} />
-        <TextLine name={'Fecha de nacimiento'} value={quiz.birth_date} />
-        <TextLine name={'Email'} value={quiz.email} />
-        <TextLine name={'Pais de origen'} value={quiz.country_of_origin} />
-      </div>
-    );
-  };
-
-  const assingQuizes = (quizes: QuizResponse[], locationStateID?: string) => {
-    setResults(quizes);
-
-    if (!locationStateID) return;
-    // const quizesFromAll = quizes.filter((q) => q.id !== locationStateID);
-    const quizesFromClient = quizes.find((q) => q.id === locationStateID);
-    // setResults(quizesFromAll);
-    setClientResult(quizesFromClient);
-  };
-
-  useEffect(() => {
-    try {
-      getQuizes().then((res) => assingQuizes(res, location.state.id));
-    } catch (e) {
-      console.error('AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHGGGG MEMUERO');
-    }
-  }, []);
   return (
     <>
-      <button onClick={() => navigate('/')}>Atras</button>
+      <button
+        className="btn-disagree text-m p-2 text-primary-800 border-primary-800 flex justify-center items-center"
+        onClick={() => navigate('/')}
+      >
+        <MdArrowBackIosNew className="text-primary-800" />
+        Volver
+      </button>
       <h3 className="title">Estos son los resultados</h3>
       <div>
         {clientResult ? (
-          <ResultCard key={clientResult.id} quiz={clientResult} />
+          <div className="flex flex-col gap-2 mt-2">
+            <p className="subtitle">Mi respuesta</p>
+
+            <ResultCard key={clientResult.id} quiz={clientResult} />
+          </div>
         ) : null}
       </div>
-      <div className="flex gap-2 mt-2">
-        {results
-          ? results.map((res) => <ResultCard key={res.id} quiz={res} />)
-          : null}
+      <div className="flex flex-col gap-2 mt-2">
+        <p className="subtitle">Todas las respuestas</p>
+        <div className="flex flex-wrap gap-2 mt-2 justify-center">
+          {results
+            ? results.map((res) =>
+                res.id === clientResult?.id ? (
+                  <ResultCard key={res.id} quiz={res} isFromClient />
+                ) : (
+                  <ResultCard key={res.id} quiz={res} />
+                )
+              )
+            : null}
+        </div>
       </div>
     </>
   );

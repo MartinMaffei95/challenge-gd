@@ -1,10 +1,5 @@
-import {
-  ChangeEventHandler,
-  FocusEventHandler,
-  HTMLInputTypeAttribute,
-} from 'react';
+import { ChangeEventHandler, FocusEventHandler } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
-import { IconType } from 'react-icons/lib';
 
 interface CheckBoxField {
   label: string;
@@ -50,7 +45,7 @@ const CheckBoxField = ({
           type={type ? type : 'text'}
           placeholder={placeholder ? placeholder : ''}
           name={inputName}
-          value={value ? true : false}
+          checked={value ? true : false}
           onBlur={handleBlur}
           onChange={handleChange}
           className={inputClassname ? `${inputClassname}` : ''}

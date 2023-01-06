@@ -8,7 +8,9 @@ function Home() {
   return (
     <>
       <Modal isOpen={isOpen} handleModal={handleModal} />
-      <h3 className="title">Responde esta encuesta!</h3>
+      <h3 className="title colored text-4xl mt-2 mb-2 text-center">
+        Responde esta encuesta!
+      </h3>
       <QuizFormContainer handleModal={handleModal} />
     </>
   );

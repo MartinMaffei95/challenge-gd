@@ -30,8 +30,12 @@ export const getQuizes = async (): Promise<DocumentData> => {
 export const postQuizes = async (body: any) => {
   try {
     const docRef = await addDoc(collection(db, 'users'), body);
-    console.log('Document written with ID: ', docRef.id);
-  } catch (e) {
-    console.error('Error adding document: ', e);
+    return docRef.id;
+  } catch (error) {
+    if (error) {
+      throw new Error('error');
+    } else {
+      throw new Error('UNEXPECTED ERROR');
+    }
   }
 };

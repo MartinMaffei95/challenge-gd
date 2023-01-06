@@ -7,18 +7,19 @@ type GratzPageProps = {
 };
 export function GratzPage({ handleModal }: GratzPageProps) {
   const navigate = useNavigate();
+  const client_id = JSON.parse(localStorage.getItem('client_id') as string);
 
   const goToResults = () => {
-    navigate('quizes', { state: { id: 'h6QL6qbQx7L7Uh67fKV0' } });
+    navigate('quizes', { state: { id: client_id } });
   };
 
   return (
     <>
       {/* <Confeti /> */}
-      <h3 className="colored text-6xl mt-6 mb-6 text-center">
+      <h3 className="colored text-4xl mt-6 mb-6 text-center">
         Felicitaciones!
       </h3>
-      <div className="flex flex-col h-full  justify-around items-center">
+      <div className="flex flex-col h-full justify-around items-center">
         <div className="flex flex-col">
           <span className="subtitle m-1 font-normal p-0">
             Excelente! Completaste el formulario correctamente!.{' '}
@@ -30,11 +31,14 @@ export function GratzPage({ handleModal }: GratzPageProps) {
             Puedes realizarla nueuvamente si lo deseas
           </span>
         </div>
-        <div className=" w-full h-12 flex justify-around mt-6">
-          <button onClick={() => handleModal(false)} className="btn-disagree">
+        <div className=" w-full h-18 flex justify-around mt-4 gap-2">
+          <button
+            onClick={() => handleModal(false)}
+            className="btn-disagree text-m p-2"
+          >
             Quiero realizarla nuevamente
           </button>
-          <button onClick={goToResults} className="btn-agree">
+          <button onClick={goToResults} className="btn-agree text-m p-2">
             Quiero ver los resultados!
           </button>
         </div>
