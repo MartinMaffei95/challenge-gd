@@ -9,7 +9,7 @@ interface InputField {
   value: string | number;
   placeholder?: string;
   handleChange: ChangeEventHandler<HTMLInputElement>;
-  // handleBlur: FocusEventHandler<HTMLInputElement>;
+  handleBlur: FocusEventHandler<HTMLInputElement>;
   errorMessage?: string | null;
   inputClassname?: string;
   labelClassname?: string;
@@ -24,7 +24,7 @@ const InputField = ({
   type,
   value,
   placeholder,
-  // handleBlur,
+  handleBlur,
   handleChange,
   errorMessage,
   inputClassname,
@@ -46,7 +46,7 @@ const InputField = ({
         placeholder={placeholder ? placeholder : ''}
         name={inputName}
         value={value}
-        // onBlur={handleBlur}
+        onBlur={handleBlur}
         onChange={handleChange}
         className={inputClassname ? `${inputClassname}` : ''}
       />

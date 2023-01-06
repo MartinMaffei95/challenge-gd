@@ -1,9 +1,11 @@
+import { FormikErrors } from 'formik';
 import {
   ChangeEvent,
   ChangeEventHandler,
   FocusEventHandler,
   SetStateAction,
 } from 'react';
+import { FiAlertCircle } from 'react-icons/fi';
 import { Option } from '../../interfaces/FieldItem.interface';
 
 interface SelectField {
@@ -12,7 +14,9 @@ interface SelectField {
   optGroup?: Option[];
   value: string;
   handleChange: ChangeEventHandler<HTMLSelectElement>;
+  handleBlur: FocusEventHandler<HTMLSelectElement>;
   errorMessage?: string | null;
+
   inputClassname?: string;
   labelClassname?: string;
 }
@@ -22,7 +26,7 @@ const SelectField = ({
   inputName,
   optGroup,
   value,
-  // handleBlur,
+  handleBlur,
   handleChange,
   errorMessage,
   inputClassname,
@@ -40,8 +44,10 @@ const SelectField = ({
         value={value}
         name={inputName}
         onChange={handleChange}
+        onBlur={handleBlur}
         className={inputClassname ? `${inputClassname}` : ''}
       >
+        <option key="" value=""></option>
         {optGroup
           ? optGroup.map((opt) => {
               return (
@@ -54,7 +60,11 @@ const SelectField = ({
             })
           : null}
       </select>
-      {errorMessage ? <p>{errorMessage}</p> : null}
+      {errorMessage ? (
+        <p className="text-red-600 pl-4 flex min-h-full items-center justify-start">
+          <FiAlertCircle /> {errorMessage}
+        </p>
+      ) : null}
     </div>
   );
 };
