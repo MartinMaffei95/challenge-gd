@@ -12,6 +12,7 @@ interface SelectField {
   optGroup?: Option[];
   value: string;
   handleChange: ChangeEventHandler<HTMLSelectElement>;
+  handleBlur: FocusEventHandler<HTMLSelectElement>;
   errorMessage?: string | null;
   inputClassname?: string;
   labelClassname?: string;
@@ -22,7 +23,7 @@ const SelectField = ({
   inputName,
   optGroup,
   value,
-  // handleBlur,
+  handleBlur,
   handleChange,
   errorMessage,
   inputClassname,
@@ -40,6 +41,7 @@ const SelectField = ({
         value={value}
         name={inputName}
         onChange={handleChange}
+        onBlur={handleBlur}
         className={inputClassname ? `${inputClassname}` : ''}
       >
         {optGroup

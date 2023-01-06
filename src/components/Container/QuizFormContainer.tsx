@@ -1,51 +1,121 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { items } from '../../config/fields.json';
 
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-// ## FORMIK & VALIDATE
-import { Formik } from 'formik';
 // ## COMPONENTS
 import InputField from '../FormFields/InputField';
 import { FieldItem } from '../../interfaces/FieldItem.interface';
-import { useFormFields } from '../../Hooks/useFormFields';
+import SelectField from '../FormFields/SelectField';
+import CheckBoxField from '../FormFields/CheckBoxField';
+import { useFormikRequired } from '../../Hooks/useFormikRequired';
+
+import { useFormik, FormikProps } from 'formik';
 
 const QuizFormContainer = () => {
   //Getting fields for form
   const [formFields, setFormFields] = useState<FieldItem[]>(items);
-  const [initValues, setInitValues] = useState({});
+
   const navigate = useNavigate();
-  const { VITE_API_URI } = import.meta.env;
-  const { initialValues, inputs, validationSchema } = getInputs(formFields);
-  const onSubmit = async (): Promise<void> => {};
+
+  const { initialValues, validations } = useFormikRequired(items);
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    console.log('values ', values);
+  };
+
+  const {
+    resetForm,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    errors,
+    values,
+    touched,
+  }: FormikProps<any> = useFormik<any>({
+    onSubmit,
+    initialValues,
+    validationSchema: validations,
+  });
+  console.log(' ERRORS: ', errors);
+  console.log(' t: ', touched);
 
   return (
     <div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values) => console.log(values)}
-      >
-        {() => (
-          <Form noValidate>
-            {/* {inputs
-              ? inputs.map((field) => (
-                  <InputField
-                    key={field.name}
-                    label={field?.label ? field?.label : ''}
-                    inputName={field?.name ? field?.name : ''}
-                    labelClassname="label-style"
-                    inputClassname={'input-style'}
-                    type={field?.type}
-                  />
-                ))
-              : null} */}
-            <button className="btn btn_submit" type="submit">
-              Submit
-            </button>
-          </Form>
-        )}
-      </Formik>
+      <form onSubmit={handleSubmit}>
+        {formFields
+          ? formFields.map((field) => {
+              switch (field.type) {
+                case 'checkbox':
+                  return (
+                    <CheckBoxField
+                      checked={values[field.name]}
+                      key={field.name}
+                      label={field?.label ? field?.label : ''}
+                      inputName={field?.name ? field?.name : ''}
+                      labelClassname="label-style"
+                      inputClassname={'w-6 accent-primary-400'}
+                      type={field?.type}
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      errorMessage={
+                        touched[field.name] || errors[field.name]
+                          ? errors[field.name]
+                          : null
+                      }
+                    />
+                  );
+                case 'select':
+                  return (
+                    <SelectField
+                      value={values[field.name]}
+                      key={field.name}
+                      label={field?.label ? field?.label : ''}
+                      inputName={field?.name ? field?.name : ''}
+                      optGroup={field?.options ? field?.options : []}
+                      labelClassname="label-style"
+                      inputClassname={'input-style'}
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      errorMessage={
+                        touched[field.name] || errors[field.name]
+                          ? errors[field.name]
+                          : null
+                      }
+                    />
+                  );
+                case 'submit':
+                  return (
+                    <button
+                      className="btn-input font-bold text-lg mt-2 mb-2"
+                      type="submit"
+                    >
+                      Guardar
+                    </button>
+                  );
+                default:
+                  return (
+                    <InputField
+                      value={values[field.name]}
+                      key={field.name}
+                      label={field?.label ? field?.label : ''}
+                      inputName={field?.name ? field?.name : ''}
+                      labelClassname="label-style"
+                      inputClassname={'input-style'}
+                      type={field?.type}
+                      handleChange={handleChange}
+                      handleBlur={handleBlur}
+                      errorMessage={
+                        touched[field.name] || errors[field.name]
+                          ? errors[field.name]
+                          : null
+                      }
+                    />
+                  );
+              }
+            })
+          : null}
+      </form>
     </div>
   );
 };
