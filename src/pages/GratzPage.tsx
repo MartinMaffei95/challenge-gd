@@ -15,17 +15,29 @@ export function GratzPage({ handleModal }: GratzPageProps) {
   return (
     <>
       {/* <Confeti /> */}
-      <h3 className="title">Felicitaciones!</h3>
-      <span>Excelente! Completaste el formulario correctamente!. </span>
-      <span>Deseas ver los resultados parciales de la encuesta? </span>
-      <span>Puedes realizarla nueuvamente si lo deseas</span>
-      <div className="bg-green-600 w-full h-12 flex justify-around">
-        <button onClick={() => handleModal(false)} className="btn-secondary">
-          Quiero realizarla nuevamente
-        </button>
-        <button onClick={goToResults} className="btn-primary">
-          Quiero ver los resultados!
-        </button>
+      <h3 className="colored text-6xl mt-6 mb-6 text-center">
+        Felicitaciones!
+      </h3>
+      <div className="flex flex-col h-full  justify-around items-center">
+        <div className="flex flex-col">
+          <span className="subtitle m-1 font-normal p-0">
+            Excelente! Completaste el formulario correctamente!.{' '}
+          </span>
+          <span className="subtitle m-1 font-normal p-0">
+            Deseas ver los resultados parciales de la encuesta?{' '}
+          </span>
+          <span className="subtitle m-1 font-normal p-0">
+            Puedes realizarla nueuvamente si lo deseas
+          </span>
+        </div>
+        <div className=" w-full h-12 flex justify-around mt-6">
+          <button onClick={() => handleModal(false)} className="btn-disagree">
+            Quiero realizarla nuevamente
+          </button>
+          <button onClick={goToResults} className="btn-agree">
+            Quiero ver los resultados!
+          </button>
+        </div>
       </div>
     </>
   );
