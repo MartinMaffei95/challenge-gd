@@ -1,6 +1,7 @@
 import {
   addDoc,
   collection,
+  doc,
   DocumentData,
   Firestore,
   FirestoreError,
@@ -8,11 +9,14 @@ import {
 } from 'firebase/firestore/lite';
 import { db } from '../firebase/friebase';
 
-export const getQuizes = async (db: Firestore): Promise<DocumentData> => {
+export const getQuizes = async (): Promise<DocumentData> => {
   try {
-    const quizesCol = collection(db, 'quizes');
+    const quizesCol = collection(db, 'users');
     const quizesSnapshot = await getDocs(quizesCol);
-    const quizRes = quizesSnapshot.docs.map((doc) => doc.data());
+    const quizRes = quizesSnapshot.docs.map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+    }));
     return quizRes;
   } catch (error) {
     if (error) {
