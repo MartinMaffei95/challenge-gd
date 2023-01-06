@@ -6,6 +6,23 @@ Una vez realizada nos muestra un modal informando que se envio nuestra encuesta.
 
 # Vistas
 
+### Home
+
+![Home page](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038081325.pdf =640x)
+
+### Modal
+
+![Modal view](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038130329.png =640x)
+
+### Resultados -desktop-
+
+![Display results](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038149957.png =640x)
+
+### Resultados -mobile-
+
+![Display results responsive](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038242834.png =640x)
+![Display results responsive](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038267737.png =640x)
+
 # Como usar
 
 Completamos los campos de la pantalla inicial y una vez finalizada la encuesta nos dara la posibilidad de revisar todos los resultados almacenados en la base de datos
