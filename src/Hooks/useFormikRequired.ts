@@ -4,7 +4,7 @@ import { FieldItem } from '../interfaces/FieldItem.interface';
 import * as yup from 'yup';
 
 const requiredMsg = 'Este campo es requerido';
-export function createYupSchema(schema, config) {
+export function createYupSchema(schema: any, config: any) {
   const { name, required, type } = config;
   let validator;
   switch (type) {
