@@ -8,7 +8,7 @@ Una vez realizada nos muestra un modal informando que se envio nuestra encuesta.
 
 ### Home
 
-![Home page](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038081325.pdf)
+![Home page](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038058339.pdf)
 
 ### Modal
 
