@@ -10,20 +10,27 @@ function QuizesPage() {
   let location = useLocation();
   type QuizResponseType = { quiz: QuizResponse };
   const ResultCard = ({ quiz }: QuizResponseType) => {
+    type TextLineProps = {
+      name: string;
+      value: string;
+    };
+    const TextLine = ({ name, value }: TextLineProps) => {
+      return (
+        <div className="label-style text-lg pt-1 pb-1 flex justify-between border-b-2">
+          <span className="font-semibold">{name}:</span>
+          <span>{value}</span>
+        </div>
+      );
+    };
     return (
-      <div key={quiz.id}>
-        <h3>
-          Nombre: <span>{quiz.full_name}</span>
-        </h3>
-        <p>
-          Fecha de nacimiento: <span>{quiz.birth_date}</span>
-        </p>
-        <p>
-          Email: <span>{quiz.email}</span>
-        </p>
-        <p>
-          Pasi de origen: <span>{quiz.country_of_origin}</span>
-        </p>
+      <div
+        className="border-primary-500 border-2 text-lg w-1/2 rounded-sm "
+        key={quiz.id}
+      >
+        <TextLine name={'Nombre'} value={quiz.full_name} />
+        <TextLine name={'Fecha de nacimiento'} value={quiz.birth_date} />
+        <TextLine name={'Email'} value={quiz.email} />
+        <TextLine name={'Pais de origen'} value={quiz.country_of_origin} />
       </div>
     );
   };
@@ -46,16 +53,15 @@ function QuizesPage() {
   }, []);
   return (
     <>
-      <h3 className="title">Estos son los resultados parciales</h3>
-      {/* {results
-        ? results.filter((res) => res.id === location?.state?.id)
-        ? results.filter((res) => res.id !== location?.state?.id)
-        : null
-      } */}
-
-      {results
-        ? results.map((res) => <ResultCard key={res.id} quiz={res} />)
-        : null}
+      <h3 className="title">Estos son los resultados</h3>
+      {clientResult ? (
+        <ResultCard key={clientResult.id} quiz={clientResult} />
+      ) : null}
+      <div className="flex gap-2 mt-2">
+        {results
+          ? results.map((res) => <ResultCard key={res.id} quiz={res} />)
+          : null}
+      </div>
     </>
   );
 }
