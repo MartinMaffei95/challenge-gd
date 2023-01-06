@@ -13,7 +13,10 @@ import { useFormikRequired } from '../../Hooks/useFormikRequired';
 import { useFormik, FormikProps } from 'formik';
 import { postQuizes } from '../../services/Quizes.services';
 
-const QuizFormContainer = () => {
+type QuizFormContainerProps = {
+  handleModal: Function;
+};
+const QuizFormContainer = ({ handleModal }: QuizFormContainerProps) => {
   //Getting fields for form
   const [formFields, setFormFields] = useState<FieldItem[]>(items);
 
@@ -29,6 +32,7 @@ const QuizFormContainer = () => {
       setErrors(initialValues);
       setTouched(initialValues);
       //redirect
+      handleModal(true);
     } catch (err) {
       if (err instanceof Error) {
         console.log(err);
@@ -56,6 +60,7 @@ const QuizFormContainer = () => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <button onClick={() => handleModal(true)}>ABRIR</button>
         {formFields
           ? formFields.map((field, i) => {
               switch (field.type) {

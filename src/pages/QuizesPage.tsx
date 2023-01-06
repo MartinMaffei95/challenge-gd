@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import QuizFormContainer from '../components/Container/QuizFormContainer';
 import { QuizResponse } from '../interfaces/QuizResponse.interface';
 import { getQuizes } from '../services/Quizes.services';
@@ -7,7 +7,11 @@ import { getQuizes } from '../services/Quizes.services';
 function QuizesPage() {
   const [results, setResults] = useState<QuizResponse[]>([]);
   const [clientResult, setClientResult] = useState<QuizResponse>();
+  const navigate = useNavigate();
+
   let location = useLocation();
+  console.log(location.state.id);
+
   type QuizResponseType = { quiz: QuizResponse };
   const ResultCard = ({ quiz }: QuizResponseType) => {
     type TextLineProps = {
@@ -37,7 +41,8 @@ function QuizesPage() {
 
   const assingQuizes = (quizes: QuizResponse[], locationStateID?: string) => {
     setResults(quizes);
-    if (locationStateID) return;
+
+    if (!locationStateID) return;
     // const quizesFromAll = quizes.filter((q) => q.id !== locationStateID);
     const quizesFromClient = quizes.find((q) => q.id === locationStateID);
     // setResults(quizesFromAll);
@@ -46,17 +51,20 @@ function QuizesPage() {
 
   useEffect(() => {
     try {
-      getQuizes().then((res) => assingQuizes(res, location?.state?.id));
+      getQuizes().then((res) => assingQuizes(res, location.state.id));
     } catch (e) {
       console.error('AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHGGGG MEMUERO');
     }
   }, []);
   return (
     <>
+      <button onClick={() => navigate('/')}>Atras</button>
       <h3 className="title">Estos son los resultados</h3>
-      {clientResult ? (
-        <ResultCard key={clientResult.id} quiz={clientResult} />
-      ) : null}
+      <div>
+        {clientResult ? (
+          <ResultCard key={clientResult.id} quiz={clientResult} />
+        ) : null}
+      </div>
       <div className="flex gap-2 mt-2">
         {results
           ? results.map((res) => <ResultCard key={res.id} quiz={res} />)
