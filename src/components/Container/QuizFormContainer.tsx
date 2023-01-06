@@ -11,6 +11,7 @@ import CheckBoxField from '../FormFields/CheckBoxField';
 import { useFormikRequired } from '../../Hooks/useFormikRequired';
 
 import { useFormik, FormikProps } from 'formik';
+import { postQuizes } from '../../services/Quizes.services';
 
 const QuizFormContainer = () => {
   //Getting fields for form
@@ -20,12 +21,26 @@ const QuizFormContainer = () => {
 
   const { initialValues, validations } = useFormikRequired(items);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    console.log('values ', values);
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    try {
+      await postQuizes(values);
+      //reset form values
+      setValues(initialValues);
+      setErrors(initialValues);
+      setTouched(initialValues);
+      //redirect
+    } catch (err) {
+      if (err instanceof Error) {
+        console.log(err);
+      } else {
+        console.log(err);
+      }
+    }
   };
-
   const {
-    resetForm,
+    setErrors,
+    setTouched,
+    setValues,
     handleSubmit,
     handleChange,
     handleBlur,
@@ -34,23 +49,21 @@ const QuizFormContainer = () => {
     touched,
   }: FormikProps<any> = useFormik<any>({
     onSubmit,
-    initialValues,
+    initialValues: initialValues,
     validationSchema: validations,
   });
-  console.log(' ERRORS: ', errors);
-  console.log(' t: ', touched);
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         {formFields
-          ? formFields.map((field) => {
+          ? formFields.map((field, i) => {
               switch (field.type) {
                 case 'checkbox':
                   return (
                     <CheckBoxField
+                      key={field?.name || i}
                       checked={values[field.name]}
-                      key={field.name}
                       label={field?.label ? field?.label : ''}
                       inputName={field?.name ? field?.name : ''}
                       labelClassname="label-style"
@@ -59,7 +72,7 @@ const QuizFormContainer = () => {
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                       errorMessage={
-                        touched[field.name] || errors[field.name]
+                        touched[field.name] && errors[field.name]
                           ? errors[field.name]
                           : null
                       }
@@ -68,8 +81,8 @@ const QuizFormContainer = () => {
                 case 'select':
                   return (
                     <SelectField
+                      key={field?.name || i}
                       value={values[field.name]}
-                      key={field.name}
                       label={field?.label ? field?.label : ''}
                       inputName={field?.name ? field?.name : ''}
                       optGroup={field?.options ? field?.options : []}
@@ -78,7 +91,7 @@ const QuizFormContainer = () => {
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                       errorMessage={
-                        touched[field.name] || errors[field.name]
+                        touched[field.name] && errors[field.name]
                           ? errors[field.name]
                           : null
                       }
@@ -87,6 +100,7 @@ const QuizFormContainer = () => {
                 case 'submit':
                   return (
                     <button
+                      key={field?.name || i}
                       className="btn-input font-bold text-lg mt-2 mb-2"
                       type="submit"
                     >
@@ -96,8 +110,8 @@ const QuizFormContainer = () => {
                 default:
                   return (
                     <InputField
+                      key={field?.name || i}
                       value={values[field.name]}
-                      key={field.name}
                       label={field?.label ? field?.label : ''}
                       inputName={field?.name ? field?.name : ''}
                       labelClassname="label-style"
@@ -106,7 +120,7 @@ const QuizFormContainer = () => {
                       handleChange={handleChange}
                       handleBlur={handleBlur}
                       errorMessage={
-                        touched[field.name] || errors[field.name]
+                        touched[field.name] && errors[field.name]
                           ? errors[field.name]
                           : null
                       }

@@ -1,12 +1,14 @@
 import {
   addDoc,
   collection,
+  DocumentData,
   Firestore,
+  FirestoreError,
   getDocs,
 } from 'firebase/firestore/lite';
 import { db } from '../firebase/friebase';
 
-export const getQuizes = async (db: Firestore) => {
+export const getQuizes = async (db: Firestore): Promise<DocumentData> => {
   try {
     const quizesCol = collection(db, 'quizes');
     const quizesSnapshot = await getDocs(quizesCol);

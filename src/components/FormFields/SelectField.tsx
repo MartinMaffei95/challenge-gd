@@ -4,6 +4,7 @@ import {
   FocusEventHandler,
   SetStateAction,
 } from 'react';
+import { FiAlertCircle } from 'react-icons/fi';
 import { Option } from '../../interfaces/FieldItem.interface';
 
 interface SelectField {
@@ -44,6 +45,7 @@ const SelectField = ({
         onBlur={handleBlur}
         className={inputClassname ? `${inputClassname}` : ''}
       >
+        <option key="" value=""></option>
         {optGroup
           ? optGroup.map((opt) => {
               return (
@@ -56,7 +58,11 @@ const SelectField = ({
             })
           : null}
       </select>
-      {errorMessage ? <p>{errorMessage}</p> : null}
+      {errorMessage ? (
+        <p className="text-red-600 pl-4 flex min-h-full items-center justify-start">
+          <FiAlertCircle /> {errorMessage}
+        </p>
+      ) : null}
     </div>
   );
 };
