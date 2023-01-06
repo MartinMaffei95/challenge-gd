@@ -8,20 +8,20 @@ Una vez realizada nos muestra un modal informando que se envio nuestra encuesta.
 
 ### Home
 
-![Home page](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038081325.pdf =640x)
+![Home page](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038081325.pdf)
 
 ### Modal
 
-![Modal view](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038130329.png =640x)
+![Modal view](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038130329.png)
 
 ### Resultados -desktop-
 
-![Display results](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038149957.png =640x)
+![Display results](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038149957.png)
 
 ### Resultados -mobile-
 
-![Display results responsive](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038242834.png =640x)
-![Display results responsive](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/appImages/1673038267737.png =640x)
+![Display results responsive](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038242834.png)
+![Display results responsive](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038267737.png)
 
 # Como usar
 
