@@ -9,7 +9,7 @@ type QuizResponseType = {
 export const ResultCard = ({ quiz, isFromClient }: QuizResponseType) => {
   return (
     <div
-      className="border-primary-500 border-2 text-lg w-2/2 rounded-sm overflow-hidden relative shadow-xl"
+      className="border-primary-500 border-2 rounded-sm  text-lg w-2/2 rounded-sm overflow-hidden relative shadow-xl"
       key={quiz.id}
     >
       {isFromClient ? (

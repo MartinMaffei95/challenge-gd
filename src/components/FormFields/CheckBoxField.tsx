@@ -1,5 +1,5 @@
 import { FormikErrors } from 'formik';
-import { ChangeEventHandler, FocusEventHandler } from 'react';
+import { ChangeEventHandler, FocusEventHandler, useState } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
 
 interface CheckBoxField {
@@ -8,7 +8,8 @@ interface CheckBoxField {
   type?: string;
   placeholder?: string;
   value: boolean;
-  handleChange: ChangeEventHandler<HTMLInputElement>;
+  // handleChange: ChangeEventHandler<HTMLInputElement>;
+  handleChange: Function;
   handleBlur: FocusEventHandler<HTMLInputElement>;
   errorMessage?: string | null;
 
@@ -24,7 +25,7 @@ const CheckBoxField = ({
   inputName,
   type,
   placeholder,
-  value,
+  value = false,
   handleBlur,
   handleChange,
   errorMessage,
@@ -34,6 +35,11 @@ const CheckBoxField = ({
   iconPosition,
   iconFX,
 }: CheckBoxField) => {
+  console.log(value);
+  const [inputVal, setInputVal] = useState<boolean>(false);
+  const handleValue = () => {
+    handleChange(inputName, !value);
+  };
   return (
     <>
       <div className="relative flex flex-row-reverse justify-center w-full pl-8 ">
@@ -49,7 +55,7 @@ const CheckBoxField = ({
           name={inputName}
           checked={value ? true : false}
           onBlur={handleBlur}
-          onChange={handleChange}
+          onChange={handleValue}
           className={inputClassname ? `${inputClassname}` : ''}
         />
         <span
@@ -61,7 +67,7 @@ const CheckBoxField = ({
         {/* iconPosition */}
       </div>
       {errorMessage ? (
-        <p className="text-red-600 pl-4 flex min-h-full items-center justify-start">
+        <p className="error-alert">
           <FiAlertCircle /> {errorMessage}
         </p>
       ) : null}
