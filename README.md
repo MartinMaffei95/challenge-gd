@@ -7,7 +7,9 @@ Una vez realizada nos muestra un modal informando que se envio nuestra encuesta.
 # Descripcion
 
 El proyecto fue creado con Vite usando Reacjs + Typescript.
+
 Deploy en [Vercel](https://challenge-greydive-seven.vercel.app/)
+
 Repositorio en [GitHub](https://github.com/MartinMaffei95/challenge-greydive)
 
 # Vistas
