@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { ResultCard } from '../components/Pure/ResultCard';
 import { useResultStates } from '../Hooks/useResultStates';
+import SkeletonCard from '../components/Pure/SkeletonCard';
 function QuizesPage() {
-  const { results, clientResult } = useResultStates();
+  const { results, clientResult, loading } = useResultStates();
 
   const navigate = useNavigate();
 
@@ -26,18 +27,26 @@ function QuizesPage() {
           </div>
         ) : null}
       </div>
+
       <div className="flex flex-col gap-2 mt-2">
         <p className="subtitle">Todas las respuestas</p>
         <div className="flex flex-wrap gap-2 mt-2 justify-center">
-          {results
-            ? results.map((res) =>
-                res.id === clientResult?.id ? (
-                  <ResultCard key={res.id} quiz={res} isFromClient />
-                ) : (
-                  <ResultCard key={res.id} quiz={res} />
-                )
+          {results && results.length > 0 ? (
+            results.map((res) =>
+              res.id === clientResult?.id ? (
+                <ResultCard key={res.id} quiz={res} isFromClient />
+              ) : (
+                <ResultCard key={res.id} quiz={res} />
               )
-            : null}
+            )
+          ) : loading === true ? (
+            <>
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+              <SkeletonCard />
+            </>
+          ) : null}
         </div>
       </div>
     </div>

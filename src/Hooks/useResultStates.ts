@@ -6,6 +6,7 @@ import { getQuizes } from '../services/Quizes.services';
 export const useResultStates = () => {
   const [results, setResults] = useState<QuizResponse[]>([]);
   const [clientResult, setClientResult] = useState<QuizResponse>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   let location = useLocation();
   console.log(location?.state?.id);
@@ -18,11 +19,16 @@ export const useResultStates = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     try {
-      getQuizes().then((res) =>
-        assingQuizes(res as QuizResponse[], location?.state?.id)
-      );
+      getQuizes().then((res) => {
+        setLoading(false);
+
+        return assingQuizes(res as QuizResponse[], location?.state?.id);
+      });
     } catch (e) {
+      setLoading(false);
+
       console.error('AAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHGGGG MEMUERO');
     }
   }, []);
@@ -30,5 +36,6 @@ export const useResultStates = () => {
   return {
     results,
     clientResult,
+    loading,
   };
 };

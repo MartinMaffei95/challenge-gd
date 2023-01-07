@@ -67,7 +67,7 @@ const CheckBoxField = ({
         {/* iconPosition */}
       </div>
       {errorMessage ? (
-        <p className="text-red-600 pl-4 flex min-h-full items-center justify-start">
+        <p className="error-alert">
           <FiAlertCircle /> {errorMessage}
         </p>
       ) : null}

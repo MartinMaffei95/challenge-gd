@@ -11,8 +11,9 @@ const Error404 = () => {
         Upps...
       </h3>
       <span className="colored text-4xl mt-6 mb-6 text-center bg-gradient-to-tl from-rose-400 to-rose-700">
-        Usted no deberia estar aqui
+        No encontramos lo que buscaba
       </span>
+      <span className="text-2xl mb-2 text-center font-light">404 error</span>
       <div className="flex flex-row justify-between items-center w-full h-full">
         <button
           className="btn-disagree text-m p-2 text-primary-800 border-primary-800 flex justify-center items-center m-auto self-baseline"
