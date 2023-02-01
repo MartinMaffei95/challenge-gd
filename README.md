@@ -1,4 +1,4 @@
-# Challenge greydive
+# Challenge GD
 
 App en Reactjs. Genera una interfaz de app para encuestas basandose en un archivo JSON.
 Las respuestas de la encuesta son enviadas a una base de datos de Firebase.
