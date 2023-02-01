@@ -8,28 +8,28 @@ Una vez realizada nos muestra un modal informando que se envio nuestra encuesta.
 
 El proyecto fue creado con Vite usando Reacjs + Typescript.
 
-Deploy en [Vercel](https://challenge-greydive-seven.vercel.app/)
+Deploy en [Vercel](https://challenge-gd-seven.vercel.app/)
 
-Repositorio en [GitHub](https://github.com/MartinMaffei95/challenge-greydive)
+Repositorio en [GitHub](https://github.com/MartinMaffei95/challenge-gd)
 
 # Vistas
 
 ### Home
 
-![Home page](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038058339.png)
+![Home page](https://github.com/MartinMaffei95/challenge-gd/blob/main/public/1673038058339.png)
 
 ### Modal
 
-![Modal view](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038130329.png)
+![Modal view](https://github.com/MartinMaffei95/challenge-gd/blob/main/public/1673038130329.png)
 
 ### Resultados -desktop-
 
-![Display results](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038149957.png)
+![Display results](https://github.com/MartinMaffei95/challenge-gd/blob/main/public/1673038149957.png)
 
 ### Resultados -mobile-
 
-![Display results responsive](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038242834.png)
-![Display results responsive](https://github.com/MartinMaffei95/challenge-greydive/blob/main/public/1673038267737.png)
+![Display results responsive](https://github.com/MartinMaffei95/challenge-gd/blob/main/public/1673038242834.png)
+![Display results responsive](https://github.com/MartinMaffei95/challenge-gd/blob/main/public/1673038267737.png)
 
 # Como usar
 
